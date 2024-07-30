@@ -34,25 +34,50 @@
 //     }
 // }
 
-//Exercise 3
+// Exercise 3
 
-shortBooks();
+// shortBooks();
 
-async function shortBooks() {
-  let books = await fetchBooks();
-  books.forEach(book => {
-    if (book.pages < 500){
-        document.body.innerHTML += `Title: ${book.title}, Pages: ${book.pages}<br />`
+// async function shortBooks() {
+//   let books = await fetchBooks();
+//   books.forEach(book => {
+//     if (book.pages < 500){
+//         document.body.innerHTML += `Title: ${book.title}, Pages: ${book.pages}<br />`
+//     }
+//   });
+// }
+
+// async function fetchBooks() {
+//   try {
+//     let response = await fetch("https://majazocom.github.io/Data/books.json");
+//     let data = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+
+//Exercise 4
+confirmedGuests();
+
+async function confirmedGuests() {
+  let guests = await fetchGuests();
+
+  guests.forEach((guest) => {
+    if (guest.attending === true) {
+      document.body.innerHTML += `${guest.name} <br/>`;
     }
   });
 }
 
-async function fetchBooks() {
-  try {
-    let response = await fetch("https://majazocom.github.io/Data/books.json");
-    let data = await response.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
+async function fetchGuests() {
+  let guests = [];
+  await fetch("https://majazocom.github.io/Data/attendees.json")
+    .then((response) => response.json())
+    .then((data) => {
+      data.forEach((guest) => {
+        guests.push(guest);
+      });
+    });
+  return guests;
 }
