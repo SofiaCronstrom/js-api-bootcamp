@@ -19,7 +19,7 @@ renderDogs();
 async function renderDogs(){
     let dogs = await fetchDogs();
     dogs.forEach(dog => {
-        console.log(dog);
+        document.body.innerHTML += `<img src='${dog.img}'/> <br /> ${dog.name} <br />`
     });
 
 
